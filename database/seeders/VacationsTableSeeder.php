@@ -239,6 +239,28 @@ class VacationsTableSeeder extends Seeder
                 'updated_at' => '2024-10-14 14:13:13',
                 'deleted_at' => NULL,
             ),
+            10 => 
+            array (
+                'id' => 11,
+                'personas_id' => 49,
+                'number' => '000011',
+                'periodo_inicio' => NULL,
+                'periodo_fin' => NULL,
+                'fecha_incio' => '2024-10-25',
+                'fecha_fin' => '2024-11-04',
+                'dias' => '7',
+                'sucursal' => 'TRINIDAD',
+                'area' => 'OPERACIONES CONTABLES',
+                'cargo' => 'ASISTENTE DE OPERACIONES',
+                'type_vacations' => 'Otros',
+                'type_solicitud' => 'Vacacion',
+                'observaciones' => NULL,
+                'user_id' => 9,
+                'status_at' => 'pendientes',
+                'created_at' => '2024-10-22 13:43:30',
+                'updated_at' => '2024-10-22 13:43:30',
+                'deleted_at' => NULL,
+            ),
         ));
         
         
