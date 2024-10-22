@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
     //    $this->call(PolizasTableSeeder::class);
     //    $this->call(ActaEntregasTableSeeder::class);
     //    $this->call(CertificatesTableSeeder::class);
-        $this->call(ProductosTableSeeder::class);
+    //    $this->call(ProductosTableSeeder::class);
 
 
     //    $this->call(PasswordResetTokensTableSeeder::class);
