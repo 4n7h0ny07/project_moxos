@@ -18,37 +18,45 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        $this->call(BajasActivosTableSeeder::class);
-        $this->call(CertificatesTableSeeder::class);
-        $this->call(CoordenadasTableSeeder::class);
-        $this->call(FiniquitosTableSeeder::class);
-        $this->call(PasswordResetTokensTableSeeder::class);
-        $this->call(VacationsTableSeeder::class);
-        $this->call(UserRolesTableSeeder::class);
-        $this->call(UsersTableSeeder::class);
-        $this->call(TypesTableSeeder::class);
-        $this->call(ActaEntregasTableSeeder::class);
-        $this->call(AltasActivosTableSeeder::class);
-        $this->call(CatalogosTableSeeder::class);
-        $this->call(CatalogoDetallesTableSeeder::class);
-        $this->call(DataRowsTableSeeder::class);
+
+        // sistema master
         $this->call(DataTypesTableSeeder::class);
-        $this->call(FailedJobsTableSeeder::class);
-        $this->call(GruposTableSeeder::class);
-        $this->call(MarcasTableSeeder::class);
+        $this->call(DataRowsTableSeeder::class);
         $this->call(MenusTableSeeder::class);
         $this->call(MenuItemsTableSeeder::class);
-        $this->call(MigrationsTableSeeder::class);
-        $this->call(PermisosTableSeeder::class);
+        $this->call(RolesTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
+        $this->call(UserRolesTableSeeder::class);
         $this->call(PermissionsTableSeeder::class);
         $this->call(PermissionRoleTableSeeder::class);
-        $this->call(PersonalAccessTokensTableSeeder::class);
-        $this->call(PersonasTableSeeder::class);
-        $this->call(PolizasTableSeeder::class);
-        $this->call(ProductosTableSeeder::class);
-        $this->call(RequerimientosTableSeeder::class);
-        $this->call(RolesTableSeeder::class);
+
         $this->call(SettingsTableSeeder::class);
-        $this->call(TranslationsTableSeeder::class);
+
+        // sistema datatabes
+        $this->call(GruposTableSeeder::class);
+        $this->call(PersonasTableSeeder::class);
+        $this->call(PermisosTableSeeder::class);
+        $this->call(RequerimientosTableSeeder::class);
+        $this->call(CoordenadasTableSeeder::class);
+        $this->call(AltasActivosTableSeeder::class);        
+        $this->call(BajasActivosTableSeeder::class);
+        $this->call(CatalogosTableSeeder::class);
+        $this->call(CatalogoDetallesTableSeeder::class);      
+        $this->call(VacationsTableSeeder::class);
+        $this->call(FiniquitosTableSeeder::class);
+        $this->call(MarcasTableSeeder::class);
+        $this->call(TypesTableSeeder::class);
+        $this->call(PolizasTableSeeder::class);
+        $this->call(ActaEntregasTableSeeder::class);
+        $this->call(CertificatesTableSeeder::class);
+        $this->call(ProductosTableSeeder::class);
+
+
+    //    $this->call(PasswordResetTokensTableSeeder::class);
+    //    $this->call(UsersTableSeeder::class);  
+    //    $this->call(FailedJobsTableSeeder::class);
+    //    $this->call(MigrationsTableSeeder::class);
+    //    $this->call(PersonalAccessTokensTableSeeder::class);
+    //    $this->call(TranslationsTableSeeder::class);
     }
 }
