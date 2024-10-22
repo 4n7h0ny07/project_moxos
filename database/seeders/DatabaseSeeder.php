@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
         $this->call(GruposTableSeeder::class);
         $this->call(PersonasTableSeeder::class);
         $this->call(PermisosTableSeeder::class);
-        $this->call(RequerimientosTableSeeder::class);
+    //  $this->call(RequerimientosTableSeeder::class);
         $this->call(CoordenadasTableSeeder::class);
         $this->call(AltasActivosTableSeeder::class);        
         $this->call(BajasActivosTableSeeder::class);
