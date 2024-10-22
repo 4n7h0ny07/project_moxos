@@ -46,9 +46,9 @@ class DatabaseSeeder extends Seeder
     //    $this->call(FiniquitosTableSeeder::class);
         $this->call(MarcasTableSeeder::class);
         $this->call(TypesTableSeeder::class);
-        $this->call(PolizasTableSeeder::class);
-        $this->call(ActaEntregasTableSeeder::class);
-        $this->call(CertificatesTableSeeder::class);
+    //    $this->call(PolizasTableSeeder::class);
+    //    $this->call(ActaEntregasTableSeeder::class);
+    //    $this->call(CertificatesTableSeeder::class);
         $this->call(ProductosTableSeeder::class);
 
 
