@@ -1,0 +1,202 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #221f1e;
+}
+
+/* Estilo del contenedor principal */
+.container {
+    display: flex;
+    height: 85vh;
+    max-width: 100%;
+    margin: 0 auto;
+    box-shadow: 0 2px 25px rgba(0, 0, 0, 0.1);
+    background-color: #8CC53F; /* background-color del fondo de la aplicaion*/
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Estilo del panel de contactos */
+.contacts-panel {
+    width: 30%;
+    background-color: #f8f9fa;
+    border-right: 1px solid #dfe5ec;
+    overflow-y: auto;
+}
+
+.header {
+    background-color: #202C33;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contact {
+    padding: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #dfe5ec;
+    transition: background-color 0.2s;
+}
+
+.contact:hover {
+    background-color: #e0e0e0;
+}
+
+.contact img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-name {
+    font-weight: bold;
+}
+
+.contact-last-message {
+    font-size: 0.9rem;
+    color: #888;
+}
+
+/* Estilo del área de chat */
+.chat-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-header {
+    background-color: #202C33;
+    color: white;
+    padding: 15px;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+}
+
+.chat-header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background-color: #f0f0f0;
+}
+
+.message {
+    max-width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    position: relative;
+    font-size: 0.9rem;
+}
+
+.message.sent {
+    background-color: #DCF8C6;
+    margin-left: auto;
+}
+
+.message.received {
+    background-color: #ffffff;
+    margin-right: auto;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.message:before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.message.sent:before {
+    border-width: 10px 0 10px 10px;
+    border-color: transparent transparent transparent #DCF8C6;
+    top: 0;
+    right: -10px;
+}
+
+.message.received:before {
+    border-width: 10px 10px 10px 0;
+    border-color: transparent #ffffff transparent transparent;
+    top: 0;
+    left: -10px;
+}
+
+/* Estilo del área de entrada de mensajes */
+.input-area {
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #dfe5ec;
+    display: flex;
+}
+
+.input-area input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    outline: none;
+}
+
+.input-area button {
+    background-color: #25D366;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    margin-left: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-area button:hover {
+    background-color: #128C7E;
+}
+
+/* Estilo del QR */
+.qr-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #88888871;
+    border-bottom: 1px solid #dfe5ec;
+    padding: 20%;
+    margin-top: 150px;
+    margin-left: 350px;
+
+    width: 225px;
+    height: 225px;
+}
+
+#qr-code {
+    width: 200px;
+    height: 200px;
+}

@@ -1,0 +1,278 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+
+class DataTypesTableSeeder extends Seeder
+{
+
+    /**
+     * Auto generated seed file
+     *
+     * @return void
+     */
+    public function run()
+    {
+        
+
+        \DB::table('data_types')->delete();
+        
+        \DB::table('data_types')->insert(array (
+            0 => 
+            array (
+                'id' => 1,
+                'name' => 'users',
+                'slug' => 'users',
+                'display_name_singular' => 'User',
+                'display_name_plural' => 'Users',
+                'icon' => 'voyager-person',
+                'model_name' => 'TCG\\Voyager\\Models\\User',
+                'policy_name' => 'TCG\\Voyager\\Policies\\UserPolicy',
+                'controller' => 'TCG\\Voyager\\Http\\Controllers\\VoyagerUserController',
+                'description' => '',
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => NULL,
+                'created_at' => '2024-06-13 18:52:51',
+                'updated_at' => '2024-06-13 18:52:51',
+            ),
+            1 => 
+            array (
+                'id' => 2,
+                'name' => 'menus',
+                'slug' => 'menus',
+                'display_name_singular' => 'Menu',
+                'display_name_plural' => 'Menus',
+                'icon' => 'voyager-list',
+                'model_name' => 'TCG\\Voyager\\Models\\Menu',
+                'policy_name' => NULL,
+                'controller' => '',
+                'description' => '',
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => NULL,
+                'created_at' => '2024-06-13 18:52:51',
+                'updated_at' => '2024-06-13 18:52:51',
+            ),
+            2 => 
+            array (
+                'id' => 3,
+                'name' => 'roles',
+                'slug' => 'roles',
+                'display_name_singular' => 'Role',
+                'display_name_plural' => 'Roles',
+                'icon' => 'voyager-lock',
+                'model_name' => 'TCG\\Voyager\\Models\\Role',
+                'policy_name' => NULL,
+                'controller' => 'TCG\\Voyager\\Http\\Controllers\\VoyagerRoleController',
+                'description' => '',
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => NULL,
+                'created_at' => '2024-06-13 18:52:51',
+                'updated_at' => '2024-06-13 18:52:51',
+            ),
+            3 => 
+            array (
+                'id' => 4,
+                'name' => 'grupos',
+                'slug' => 'grupos',
+                'display_name_singular' => 'Grupo',
+                'display_name_plural' => 'Grupos',
+                'icon' => 'voyager-group',
+                'model_name' => 'App\\Models\\Grupos',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null}',
+                'created_at' => '2024-06-18 13:31:57',
+                'updated_at' => '2024-06-18 13:31:57',
+            ),
+            4 => 
+            array (
+                'id' => 5,
+                'name' => 'personas',
+                'slug' => 'personas',
+                'display_name_singular' => 'Persona',
+                'display_name_plural' => 'Personas',
+                'icon' => 'voyager-people',
+                'model_name' => 'App\\Models\\Personas',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'created_at' => '2024-06-18 13:59:16',
+                'updated_at' => '2024-10-01 18:59:48',
+            ),
+            5 => 
+            array (
+                'id' => 6,
+                'name' => 'requerimientos',
+                'slug' => 'requerimientos',
+                'display_name_singular' => 'Requerimiento',
+                'display_name_plural' => 'Requerimientos',
+                'icon' => 'voyager-harddrive',
+                'model_name' => 'App\\Models\\Requerimientos',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'created_at' => '2024-06-18 19:18:57',
+                'updated_at' => '2024-09-27 16:14:34',
+            ),
+            6 => 
+            array (
+                'id' => 7,
+                'name' => 'altas_activos',
+                'slug' => 'altas-activos',
+                'display_name_singular' => 'Altas Activo',
+                'display_name_plural' => 'Altas Activos',
+                'icon' => 'voyager-harddrive',
+                'model_name' => 'App\\Models\\AltasActivos',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'created_at' => '2024-06-18 22:53:27',
+                'updated_at' => '2024-09-27 16:13:54',
+            ),
+            7 => 
+            array (
+                'id' => 8,
+                'name' => 'catalogos',
+                'slug' => 'catalogos',
+                'display_name_singular' => 'Catalogo',
+                'display_name_plural' => 'Catalogos',
+                'icon' => 'voyager-logbook',
+                'model_name' => 'App\\Models\\Catalogo',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'created_at' => '2024-07-06 15:08:33',
+                'updated_at' => '2024-07-06 15:09:38',
+            ),
+            8 => 
+            array (
+                'id' => 10,
+                'name' => 'vacations',
+                'slug' => 'vacations',
+                'display_name_singular' => 'Vacacion',
+                'display_name_plural' => 'Vacaciones',
+                'icon' => 'voyager-campfire',
+                'model_name' => 'App\\Models\\Vacations',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'created_at' => '2024-08-24 15:52:18',
+                'updated_at' => '2024-08-26 15:19:34',
+            ),
+            9 => 
+            array (
+                'id' => 11,
+                'name' => 'finiquitos',
+                'slug' => 'finiquitos',
+                'display_name_singular' => 'Finiquito',
+                'display_name_plural' => 'Finiquitos',
+                'icon' => 'voyager-skull',
+                'model_name' => 'App\\Models\\finiquito',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'created_at' => '2024-08-28 22:58:59',
+                'updated_at' => '2024-08-30 23:29:42',
+            ),
+            10 => 
+            array (
+                'id' => 13,
+                'name' => 'polizas',
+                'slug' => 'polizas',
+                'display_name_singular' => 'Poliza',
+                'display_name_plural' => 'Polizas',
+                'icon' => 'voyager-certificate',
+                'model_name' => 'App\\Models\\polizas',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'created_at' => '2024-09-05 15:50:34',
+                'updated_at' => '2024-09-05 18:52:15',
+            ),
+            11 => 
+            array (
+                'id' => 15,
+                'name' => 'marcas',
+                'slug' => 'marcas',
+                'display_name_singular' => 'Marca',
+                'display_name_plural' => 'Marcas',
+                'icon' => 'voyager-tag',
+                'model_name' => 'App\\Models\\Marcas',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null}',
+                'created_at' => '2024-10-03 19:52:50',
+                'updated_at' => '2024-10-03 19:52:50',
+            ),
+            12 => 
+            array (
+                'id' => 17,
+                'name' => 'types',
+                'slug' => 'types',
+                'display_name_singular' => 'Type',
+                'display_name_plural' => 'Types',
+                'icon' => 'voyager-cup',
+                'model_name' => 'App\\Models\\types',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'created_at' => '2024-10-03 20:42:05',
+                'updated_at' => '2024-10-03 20:45:58',
+            ),
+            13 => 
+            array (
+                'id' => 19,
+                'name' => 'productos',
+                'slug' => 'productos',
+                'display_name_singular' => 'Producto',
+                'display_name_plural' => 'Productos',
+                'icon' => 'voyager-laptop',
+                'model_name' => 'App\\Models\\Producto',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'created_at' => '2024-10-03 21:01:30',
+                'updated_at' => '2024-10-03 21:08:40',
+            ),
+        ));
+        
+        
+    }
+}
