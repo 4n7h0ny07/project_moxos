@@ -19,4 +19,16 @@ class Grupos extends Model
         return $this->belongsTo(Personas::class, 'personas_id');
     }
 
+    public function cobradores()
+    {
+        return $this->belongsTo(Cobradores::class, 'cobrador_id');
+    }
+
+    public function promotores()
+    {
+        return $this->belongsTo(Promotores::class, 'promotor_id');
+    }
+
+    
+
 }

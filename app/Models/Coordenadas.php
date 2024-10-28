@@ -9,15 +9,32 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Coordenadas extends Model
 {
     use HasFactory, SoftDeletes;
-    
+
     protected $dates = ['deleted_at'];
 
-    protected $table = 'coodenadas';
+    protected $fillable = [
+        'personas_id', // Asegúrate de que coincida con tu base de datos
+        'user_id',
+        'promotor_id', //
+        'cobrador_id', //
+        'latitude',
+        'longitude',
+        'detail_refernce'
+    ];
+
 
 
     public function persona()
     {
-        return $this->belongsTo(Personas::class);
+        return $this->belongsTo(Personas::class, 'personas_id');
+    }
+    public function cobrador()
+    {
+        return $this->belongsTo(Cobradores::class, 'cobrador_id');
+    }
+    public function promotor()
+    {
+        return $this->belongsTo(Promotores::class, 'promotor_id');
     }
 
     public function user()

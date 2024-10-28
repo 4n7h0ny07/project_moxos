@@ -501,87 +501,142 @@ class PermissionRoleTableSeeder extends Seeder
             ),
             96 => 
             array (
-                'permission_id' => 76,
+                'permission_id' => 71,
                 'role_id' => 1,
             ),
             97 => 
             array (
                 'permission_id' => 76,
-                'role_id' => 4,
+                'role_id' => 1,
             ),
             98 => 
+            array (
+                'permission_id' => 76,
+                'role_id' => 4,
+            ),
+            99 => 
             array (
                 'permission_id' => 77,
                 'role_id' => 1,
             ),
-            99 => 
+            100 => 
             array (
                 'permission_id' => 78,
                 'role_id' => 1,
             ),
-            100 => 
+            101 => 
             array (
                 'permission_id' => 79,
                 'role_id' => 1,
             ),
-            101 => 
+            102 => 
             array (
                 'permission_id' => 80,
                 'role_id' => 1,
             ),
-            102 => 
+            103 => 
             array (
                 'permission_id' => 81,
                 'role_id' => 1,
             ),
-            103 => 
+            104 => 
             array (
                 'permission_id' => 87,
                 'role_id' => 1,
             ),
-            104 => 
+            105 => 
             array (
                 'permission_id' => 88,
                 'role_id' => 1,
             ),
-            105 => 
+            106 => 
             array (
                 'permission_id' => 89,
                 'role_id' => 1,
             ),
-            106 => 
+            107 => 
             array (
                 'permission_id' => 90,
                 'role_id' => 1,
             ),
-            107 => 
+            108 => 
             array (
                 'permission_id' => 91,
                 'role_id' => 1,
             ),
-            108 => 
+            109 => 
             array (
                 'permission_id' => 92,
                 'role_id' => 1,
             ),
-            109 => 
+            110 => 
             array (
                 'permission_id' => 93,
                 'role_id' => 1,
             ),
-            110 => 
+            111 => 
             array (
                 'permission_id' => 94,
                 'role_id' => 1,
             ),
-            111 => 
+            112 => 
             array (
                 'permission_id' => 95,
                 'role_id' => 1,
             ),
-            112 => 
+            113 => 
             array (
                 'permission_id' => 96,
+                'role_id' => 1,
+            ),
+            114 => 
+            array (
+                'permission_id' => 97,
+                'role_id' => 1,
+            ),
+            115 => 
+            array (
+                'permission_id' => 98,
+                'role_id' => 1,
+            ),
+            116 => 
+            array (
+                'permission_id' => 99,
+                'role_id' => 1,
+            ),
+            117 => 
+            array (
+                'permission_id' => 100,
+                'role_id' => 1,
+            ),
+            118 => 
+            array (
+                'permission_id' => 101,
+                'role_id' => 1,
+            ),
+            119 => 
+            array (
+                'permission_id' => 102,
+                'role_id' => 1,
+            ),
+            120 => 
+            array (
+                'permission_id' => 103,
+                'role_id' => 1,
+            ),
+            121 => 
+            array (
+                'permission_id' => 104,
+                'role_id' => 1,
+            ),
+            122 => 
+            array (
+                'permission_id' => 105,
+                'role_id' => 1,
+            ),
+            123 => 
+            array (
+                'permission_id' => 106,
                 'role_id' => 1,
             ),
         ));

@@ -271,6 +271,42 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2024-10-03 21:01:30',
                 'updated_at' => '2024-10-03 21:08:40',
             ),
+            14 => 
+            array (
+                'id' => 20,
+                'name' => 'cobradores',
+                'slug' => 'cobradores',
+                'display_name_singular' => 'Cobradore',
+                'display_name_plural' => 'Cobradores',
+                'icon' => 'voyager-calendar',
+                'model_name' => 'App\\Models\\Cobradores',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'created_at' => '2024-10-25 20:06:43',
+                'updated_at' => '2024-10-26 12:57:01',
+            ),
+            15 => 
+            array (
+                'id' => 22,
+                'name' => 'promotores',
+                'slug' => 'promotores',
+                'display_name_singular' => 'Promotore',
+                'display_name_plural' => 'Promotores',
+                'icon' => 'voyager-paypal',
+                'model_name' => 'App\\Models\\Promotores',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'created_at' => '2024-10-25 20:13:59',
+                'updated_at' => '2024-10-26 12:56:47',
+            ),
         ));
         
         

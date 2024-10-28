@@ -4,6 +4,7 @@ use App\Models\Producto;
 use Illuminate\Support\Facades\Route;
 use TCG\Voyager\Http\Controllers\VoyagerMediaController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -95,41 +96,22 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::get('/bajas/{id}/pdf', [App\Http\Controllers\PdfAltasController::class, 'generatePdf'])->name('bajas.pdf');
 
-    // Ruta para acceder a las carpetas de los usuarios con el middleware y el parámetro de folderId
-    Route::get('/media/{folderId?}', [VoyagerMediaController::class, 'index'])
-        ->middleware('check.user.folder')
-        ->name('voyager.media.index');
+    Route::get('mysqldata', [App\Http\Controllers\Controller::class, 'index'])->name('mysqldata.index');
+    Route::post('export-tables', [App\Http\Controllers\Controller::class, 'exportTables'])->name('export.tables');
+    Route::post('import-tables', [App\Http\Controllers\Controller::class, 'importTables'])->name('import.tables');
+
+    // // Ruta para acceder a las carpetas de los usuarios con el middleware y el parámetro de folderId
+    // Route::get('/media/{folderId?}', [VoyagerMediaController::class, 'index'])
+    //     ->middleware('check.user.folder')
+    //     ->name('voyager.media.index');
 
     // Ruta para la visualización de correos
     Route::get('mail', [App\Http\Controllers\MailController::class, 'index'])->name('voyager.mail.index');
-    // Ruta para acceder a las carpetas de los usuarios con el middleware y el parámetro de folderId
-    // Route::get('/files', [VoyagerMediaController::class, 'files'])
-    //     ->name('voyager.media.files');
 
-    // Route::post('/new-folder', [VoyagerMediaController::class, 'new_folder'])
-    //     ->name('voyager.media.new_folder');
-
-    // Route::delete('/delete', [VoyagerMediaController::class, 'delete'])
-    //     ->name('voyager.media.delete');
-
-    // Route::post('/move', [VoyagerMediaController::class, 'move'])
-    //     ->name('voyager.media.move');
-
-    // Route::post('/rename', [VoyagerMediaController::class, 'rename'])
-    //     ->name('voyager.media.rename');
-
-    // Route::post('/upload', [VoyagerMediaController::class, 'upload'])
-    //     ->name('voyager.media.upload');
-
-    // Route::post('/crop', [VoyagerMediaController::class, 'crop'])
-    //     ->name('voyager.media.crop');
-    // Route::get('/', ['uses' => $namespacePrefix.'VoyagerMediaController@index',              'as' => 'index']);
-    // Route::post('files', ['uses' => $namespacePrefix.'VoyagerMediaController@files',              'as' => 'files']);
-    // Route::post('new_folder', ['uses' => $namespacePrefix.'VoyagerMediaController@new_folder',         'as' => 'new_folder']);
-    // Route::post('delete_file_folder', ['uses' => $namespacePrefix.'VoyagerMediaController@delete', 'as' => 'delete']);
-    // Route::post('move_file', ['uses' => $namespacePrefix.'VoyagerMediaController@move',          'as' => 'move']);
-    // Route::post('rename_file', ['uses' => $namespacePrefix.'VoyagerMediaController@rename',        'as' => 'rename']);
-    // Route::post('upload', ['uses' => $namespacePrefix.'VoyagerMediaController@upload',             'as' => 'upload']);
-    // Route::post('crop', ['uses' => $namespacePrefix.'VoyagerMediaController@crop',             'as' => 'crop']);
+ 
+  
+    Route::get('coodenada', [App\Http\Controllers\CoordenadasController::class, 'index'])->name('coodenada.index');
+    Route::post('coordenada', [App\Http\Controllers\CoordenadasController::class, 'store'])->name('coordenada.store');
+    Route::get('coordenada/show', [App\Http\Controllers\CoordenadasController::class, 'showMap'])->name('coordenada.show');
 
 });

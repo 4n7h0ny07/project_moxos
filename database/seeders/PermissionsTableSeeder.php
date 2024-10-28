@@ -747,6 +747,86 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2024-10-03 21:01:31',
                 'updated_at' => '2024-10-03 21:01:31',
             ),
+            91 => 
+            array (
+                'id' => 97,
+                'key' => 'browse_cobradores',
+                'table_name' => 'cobradores',
+                'created_at' => '2024-10-25 20:06:43',
+                'updated_at' => '2024-10-25 20:06:43',
+            ),
+            92 => 
+            array (
+                'id' => 98,
+                'key' => 'read_cobradores',
+                'table_name' => 'cobradores',
+                'created_at' => '2024-10-25 20:06:43',
+                'updated_at' => '2024-10-25 20:06:43',
+            ),
+            93 => 
+            array (
+                'id' => 99,
+                'key' => 'edit_cobradores',
+                'table_name' => 'cobradores',
+                'created_at' => '2024-10-25 20:06:43',
+                'updated_at' => '2024-10-25 20:06:43',
+            ),
+            94 => 
+            array (
+                'id' => 100,
+                'key' => 'add_cobradores',
+                'table_name' => 'cobradores',
+                'created_at' => '2024-10-25 20:06:43',
+                'updated_at' => '2024-10-25 20:06:43',
+            ),
+            95 => 
+            array (
+                'id' => 101,
+                'key' => 'delete_cobradores',
+                'table_name' => 'cobradores',
+                'created_at' => '2024-10-25 20:06:43',
+                'updated_at' => '2024-10-25 20:06:43',
+            ),
+            96 => 
+            array (
+                'id' => 102,
+                'key' => 'browse_promotores',
+                'table_name' => 'promotores',
+                'created_at' => '2024-10-25 20:13:59',
+                'updated_at' => '2024-10-25 20:13:59',
+            ),
+            97 => 
+            array (
+                'id' => 103,
+                'key' => 'read_promotores',
+                'table_name' => 'promotores',
+                'created_at' => '2024-10-25 20:13:59',
+                'updated_at' => '2024-10-25 20:13:59',
+            ),
+            98 => 
+            array (
+                'id' => 104,
+                'key' => 'edit_promotores',
+                'table_name' => 'promotores',
+                'created_at' => '2024-10-25 20:13:59',
+                'updated_at' => '2024-10-25 20:13:59',
+            ),
+            99 => 
+            array (
+                'id' => 105,
+                'key' => 'add_promotores',
+                'table_name' => 'promotores',
+                'created_at' => '2024-10-25 20:13:59',
+                'updated_at' => '2024-10-25 20:13:59',
+            ),
+            100 => 
+            array (
+                'id' => 106,
+                'key' => 'delete_promotores',
+                'table_name' => 'promotores',
+                'created_at' => '2024-10-25 20:13:59',
+                'updated_at' => '2024-10-25 20:13:59',
+            ),
         ));
         
         

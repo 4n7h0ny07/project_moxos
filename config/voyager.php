@@ -239,6 +239,7 @@ return [
         'allow_delete'        => true,
         'allow_create_folder' => true,
         'allow_rename'        => true,
+        'max_upload_size' => 31457280, // 30 MB en bytes
         /*'watermark'           => [
             'source'         => 'watermark.png',
             'position'       => 'bottom-left',

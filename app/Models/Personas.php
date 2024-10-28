@@ -23,6 +23,12 @@ class Personas extends Model
         ];
     }
 
+    // Modelo Persona.php
+    public function coordenadas()
+    {
+        return $this->hasOne(Coordenadas::class);
+    }
+
     public function grupos()
     {
         return $this->belongsTo(Grupos::class);
@@ -41,7 +47,7 @@ class Personas extends Model
     {
         return $this->hasMany(Vacations::class, 'personas_id');
     }
-   
+
     public static function boot()
     {
         parent::boot();
