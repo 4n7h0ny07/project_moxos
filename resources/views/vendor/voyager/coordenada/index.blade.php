@@ -20,58 +20,9 @@
                 <div class="panel panel-bordered">
                     <div class="row">
                         <div class="col-md-8">
-                            <div id="map" style="height: 500px; width: 100%; margin-top: 20px;"></div>
+                            <div id="map" style="height: 720px; width: 100%; margin-top: 20px;"></div>
                         </div>
-                        {{-- <div class="col-md-4">
-                            <div class="container mt-6">
-                                <h2>Registrar Coordenadas</h2>
-                                <form method="POST" action="{{ route('coordenada.store') }}">
-                                    @csrf
-                                    <div class="form-group">
-                                        <label for="persona_id">Seleccionar Persona:</label>
-                                        <select id="persona_id" class="form-control select2" name="persona_id" required>
-                                            <!-- Aquí debes cargar las opciones de personas -->
-                                            @foreach ($personas as $persona)
-                                                <option value="{{ $persona->id }}">{{ $persona->names . ' ' . $persona->apaterno . ' ' . $persona->amaterno }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="promotor_id">Seleccionar Promotor:</label>
-                                        <select id="promotor_id" class="form-control select2" name="promotor_id" required>
-                                            <!-- Aquí debes cargar las opciones de personas -->
-                                            @foreach ($promotores as $promotor)
-                                                <option value="{{ $promotor->id }}">{{ $promotor->name . ' Code.:' . $promotor->code }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="cobrador_id">Seleccionar Cobrador:</label>
-                                        <select id="cobrador_id" class="form-control select2" name="cobrador_id" required>
-                                            <!-- Aquí debes cargar las opciones de personas -->
-                                            @foreach ($cobradores as $cobrador)
-                                                <option value="{{ $cobrador->id }}">{{ $cobrador->name . ' Cod.: ' . $cobrador->code}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="latitud">Latitud:</label>
-                                        <input type="hidden" id="latitude"  name="latitude"  class="form-control" readonly="readonly">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="longitud">Longitud:</label>
-                                        <input type="hidden" id="longitude" name="longitude" class="form-control" readonly="readonly">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="detail">Detalles de la ubicación:</label>
-                                        <textarea name="detail" class="form-control"  rows="7"></textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Guardar Coordenadas</button>
-                                    <a href="{{ route('coordenada.show')}}" class="text-success">Ver Registros</a>
-                                </form>                           
-        
-                            </div>
-                        </div> --}}
+                       
                         <div class="col-md-4">
                             <div class="container mt-6">
                                 <h2>Registrar Coordenadas</h2>
