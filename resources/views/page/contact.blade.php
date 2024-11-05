@@ -7,7 +7,10 @@
     <header id="header" class="header d-flex align-items-center sticky-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center">
             <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+            <!-- Añadir Leaflet Routing Machine -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
             <a href="/" class="logo d-flex align-items-center me-auto">
+
                 <!-- Uncomment the line below if you also wish to use an image logo -->
                 <!-- <img src="assets/img/logo.png" alt=""> -->
                 <h1 class="sitename">@yield(setting('site.title'))</h1>
@@ -149,6 +152,7 @@
         </div>
         <!-- Agregar Leaflet JS -->
         <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
         {{-- <script>
             // Inicializar el mapa
             var map = L.map('map').setView([-14.831612, -64.908797], 6); // Coordenadas iniciales y nivel de zoom
@@ -172,14 +176,14 @@
             });
         </script> --}}
         <script>
-          // Inicializar el mapa
-          var map = L.map('map').setView([-14.831612, -64.908797], 10); // Vista inicial general
+          var map = L.map('map').setView([-14.831612, -64.908797], 10);
       
-          // Añadir capa de OpenStreetMap
           L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
               maxZoom: 20,
               attribution: '© OpenStreetMap'
           }).addTo(map);
+      
+          var routingControl;
       
           // Obtener la ubicación del usuario con alta precisión
           if (navigator.geolocation) {
@@ -187,56 +191,68 @@
                   function(position) {
                       var userLat = position.coords.latitude;
                       var userLon = position.coords.longitude;
-                      var accuracy = position.coords.accuracy; // Precisión en metros
+                      var accuracy = position.coords.accuracy;
       
-                      // Usar Nominatim para obtener la ciudad del usuario
                       fetch(`https://nominatim.openstreetmap.org/reverse?lat=${userLat}&lon=${userLon}&format=json`)
                           .then(response => response.json())
                           .then(data => {
                               let city = data.address.city || data.address.town || data.address.village || "tu ubicación";
-                              
-                              // Añadir marcador para la ubicación del usuario con ciudad detectada
+      
                               L.marker([userLat, userLon])
                                   .addTo(map)
                                   .bindPopup(`Estás en ${city} (Precisión: ${accuracy.toFixed(2)} metros)`)
                                   .openPopup();
       
-                              // Ajustar el nivel de zoom en función de la precisión
-                              var zoomLevel = accuracy < 20 ? 16 : accuracy < 100 ? 14 : 12;
-                              map.setView([userLat, userLon], zoomLevel);
+                              map.setView([userLat, userLon], accuracy < 20 ? 16 : 12);
+      
+                              // Obtener las sucursales más cercanas del servidor
+                              fetch(`/api/closest-branch?lat=${userLat}&lon=${userLon}`)
+                                  .then(response => response.json())
+                                  .then(data => {
+                                      if (data && data.length > 0) {
+                                          data.forEach(function(branch) {
+                                              var branchMarker = L.marker([branch.latitude, branch.longitude]).addTo(map)
+                                                  .bindPopup("<b>" + branch.name + "</b><br>" +
+                                                             "Ciudad: " + (branch.ciudad || 'N/A') + "<br>" +
+                                                             "Dirección: " + (branch.direccion || 'N/A') + "<br>" +
+                                                             `<button onclick="routeToBranch(${userLat}, ${userLon}, ${branch.latitude}, ${branch.longitude})">Cómo llegar</button>`);
+                                          });
+                                      } else {
+                                          alert("No se encontraron sucursales cercanas.");
+                                      }
+                                  })
+                                  .catch(error => console.error('Error al obtener sucursales:', error));
                           })
                           .catch(error => {
                               console.error("Error obteniendo la ciudad:", error);
                               L.marker([userLat, userLon]).addTo(map).bindPopup("Estás aquí").openPopup();
                           });
-      
-                      // Enviar las coordenadas al servidor para encontrar la sucursal más cercana
-                      fetch(`/api/closest-branch?lat=${userLat}&lon=${userLon}`)
-                          .then(response => response.json())
-                          .then(data => {
-                              if (data && data.length > 0) {
-                                  // Añadir marcadores para cada sucursal cercana
-                                  data.forEach(function(branch) {
-                                      L.marker([branch.latitude, branch.longitude]).addTo(map)
-                                          .bindPopup("<b>" + branch.name + "</b><br>" +
-                                                     "Ciudad: " + (branch.ciudad || 'N/A') + "<br>" +
-                                                     "Dirección: " + (branch.direccion || 'N/A') + "<br>" +
-                                                     "Detalles: " + (branch.details || 'N/A'));
-                                  });
-                              } else {
-                                  alert("No se encontraron sucursales cercanas.");
-                              }
-                          })
-                          .catch(error => console.error('Error al obtener sucursales:', error));
-      
                   },
                   function() {
                       alert("No se pudo obtener la ubicación. Verifica tus permisos de ubicación.");
                   },
-                  { enableHighAccuracy: true } // Solicitar la máxima precisión posible
+                  { enableHighAccuracy: true }
               );
           } else {
               alert("Geolocalización no es soportada por este navegador.");
+          }
+      
+          // Función para trazar la ruta a la sucursal
+          function routeToBranch(userLat, userLon, branchLat, branchLon) {
+              // Eliminar la ruta anterior si existe
+              if (routingControl) {
+                  routingControl.remove();
+              }
+      
+              routingControl = L.Routing.control({
+                  waypoints: [
+                      L.latLng(userLat, userLon),
+                      L.latLng(branchLat, branchLon)
+                  ],
+                  routeWhileDragging: true,
+                  show: true,
+                  createMarker: function() { return null; } // Ocultar los marcadores de la ruta
+              }).addTo(map);
           }
       </script>
 
