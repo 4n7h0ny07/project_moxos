@@ -24,9 +24,7 @@ Route::get('/', function () {
     return view('page.index');
 });
 
-Route::get('/contact', function () {
-    return view('page.contact');
-});
+Route::get('/contact', [\App\Http\Controllers\GubicationsController::class, 'publicMap'])->name('contact');
 
 Route::get('/privacity', function () {
     return view('page.privacity');
@@ -52,6 +50,8 @@ route::get('/', function () {
 
     return view('page.index', compact('producto'));
 });
+
+
 
 // Route::get('/page', function () {
 //     return view('page');

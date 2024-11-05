@@ -307,6 +307,42 @@ class DataTypesTableSeeder extends Seeder
                 'created_at' => '2024-10-25 20:13:59',
                 'updated_at' => '2024-10-26 12:56:47',
             ),
+            16 => 
+            array (
+                'id' => 23,
+                'name' => 'zktecodevices',
+                'slug' => 'zktecodevices',
+                'display_name_singular' => 'Biometrico',
+                'display_name_plural' => 'Biometricos',
+                'icon' => 'voyager-thumbs-up',
+                'model_name' => 'App\\Models\\Zktecodevice',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'created_at' => '2024-10-31 14:38:05',
+                'updated_at' => '2024-10-31 14:39:16',
+            ),
+            17 => 
+            array (
+                'id' => 24,
+                'name' => 'gubications',
+                'slug' => 'gubications',
+                'display_name_singular' => 'Sucursal',
+                'display_name_plural' => 'Sucursales',
+                'icon' => 'voyager-location',
+                'model_name' => 'App\\Models\\Gubications',
+                'policy_name' => NULL,
+                'controller' => NULL,
+                'description' => NULL,
+                'generate_permissions' => 1,
+                'server_side' => 0,
+                'details' => '{"order_column":null,"order_display_column":null,"order_direction":"asc","default_search_key":null,"scope":null}',
+                'created_at' => '2024-11-05 15:29:27',
+                'updated_at' => '2024-11-05 15:35:59',
+            ),
         ));
         
         

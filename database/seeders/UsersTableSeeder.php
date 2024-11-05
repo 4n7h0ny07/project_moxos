@@ -201,6 +201,20 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2024-10-02 19:43:10',
                 'updated_at' => '2024-10-02 19:43:10',
             ),
+            13 => 
+            array (
+                'id' => 14,
+                'role_id' => 2,
+                'name' => 'Mirian Yujo',
+                'email' => 'mirianyujo@moxos.com.bo',
+                'avatar' => 'users/default.png',
+                'email_verified_at' => NULL,
+                'password' => '$2y$12$gLNYeOsWf.oLaK6IS91ABO/UpTy67FwcHXUZR4zJ5hmTW3XGY74Xa',
+                'remember_token' => NULL,
+                'settings' => '{"locale":"es"}',
+                'created_at' => '2024-10-28 22:21:00',
+                'updated_at' => '2024-10-28 22:21:00',
+            ),
         ));
         
         

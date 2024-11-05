@@ -595,6 +595,38 @@ class MenuItemsTableSeeder extends Seeder
                 'route' => 'voyager.promotores.index',
                 'parameters' => NULL,
             ),
+            36 => 
+            array (
+                'id' => 42,
+                'menu_id' => 1,
+                'title' => 'Biometricos',
+                'url' => '',
+                'target' => '_self',
+                'icon_class' => 'voyager-thumbs-up',
+                'color' => NULL,
+                'parent_id' => NULL,
+                'order' => 10,
+                'created_at' => '2024-10-31 14:38:06',
+                'updated_at' => '2024-10-31 14:38:06',
+                'route' => 'voyager.zktecodevices.index',
+                'parameters' => NULL,
+            ),
+            37 => 
+            array (
+                'id' => 43,
+                'menu_id' => 1,
+                'title' => 'Sucursales',
+                'url' => '',
+                'target' => '_self',
+                'icon_class' => 'voyager-location',
+                'color' => NULL,
+                'parent_id' => NULL,
+                'order' => 11,
+                'created_at' => '2024-11-05 15:29:27',
+                'updated_at' => '2024-11-05 15:29:27',
+                'route' => 'voyager.gubications.index',
+                'parameters' => NULL,
+            ),
         ));
         
         

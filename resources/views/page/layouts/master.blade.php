@@ -102,7 +102,7 @@
             <li><a href="/">Home</a></li>
             <li><a href="{{ route('privacity')}}">About us</a></li>
             <li><a href="{{ route('calcular.credito')}}">Services</a></li>
-            <li><a href="{{ route('terms')}}">Terms of service</a></li>
+            <li><a href="{{ route('contact')}}">Contact</a></li>
             <li><a href="{{ route('privacity')}}">Privacy policy</a></li>
           </ul>
         </div>
@@ -113,8 +113,8 @@
             <li><a href="#">Web Design</a></li>
             <li><a href="#">Web Development</a></li>
             <li><a href="#">Product Management</a></li>
-            <li><a href="#">Marketing</a></li>
-            <li><a href="#">Graphic Design</a></li>
+            <li><a href="{{ route('terms')}}">Terms of service</a></li>
+            <li><a href="{{ route('privacity')}}">Privacy policy</a></li>
           </ul>
         </div>
 

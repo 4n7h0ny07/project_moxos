@@ -827,6 +827,86 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2024-10-25 20:13:59',
                 'updated_at' => '2024-10-25 20:13:59',
             ),
+            101 => 
+            array (
+                'id' => 107,
+                'key' => 'browse_zktecodevices',
+                'table_name' => 'zktecodevices',
+                'created_at' => '2024-10-31 14:38:06',
+                'updated_at' => '2024-10-31 14:38:06',
+            ),
+            102 => 
+            array (
+                'id' => 108,
+                'key' => 'read_zktecodevices',
+                'table_name' => 'zktecodevices',
+                'created_at' => '2024-10-31 14:38:06',
+                'updated_at' => '2024-10-31 14:38:06',
+            ),
+            103 => 
+            array (
+                'id' => 109,
+                'key' => 'edit_zktecodevices',
+                'table_name' => 'zktecodevices',
+                'created_at' => '2024-10-31 14:38:06',
+                'updated_at' => '2024-10-31 14:38:06',
+            ),
+            104 => 
+            array (
+                'id' => 110,
+                'key' => 'add_zktecodevices',
+                'table_name' => 'zktecodevices',
+                'created_at' => '2024-10-31 14:38:06',
+                'updated_at' => '2024-10-31 14:38:06',
+            ),
+            105 => 
+            array (
+                'id' => 111,
+                'key' => 'delete_zktecodevices',
+                'table_name' => 'zktecodevices',
+                'created_at' => '2024-10-31 14:38:06',
+                'updated_at' => '2024-10-31 14:38:06',
+            ),
+            106 => 
+            array (
+                'id' => 112,
+                'key' => 'browse_gubications',
+                'table_name' => 'gubications',
+                'created_at' => '2024-11-05 15:29:27',
+                'updated_at' => '2024-11-05 15:29:27',
+            ),
+            107 => 
+            array (
+                'id' => 113,
+                'key' => 'read_gubications',
+                'table_name' => 'gubications',
+                'created_at' => '2024-11-05 15:29:27',
+                'updated_at' => '2024-11-05 15:29:27',
+            ),
+            108 => 
+            array (
+                'id' => 114,
+                'key' => 'edit_gubications',
+                'table_name' => 'gubications',
+                'created_at' => '2024-11-05 15:29:27',
+                'updated_at' => '2024-11-05 15:29:27',
+            ),
+            109 => 
+            array (
+                'id' => 115,
+                'key' => 'add_gubications',
+                'table_name' => 'gubications',
+                'created_at' => '2024-11-05 15:29:27',
+                'updated_at' => '2024-11-05 15:29:27',
+            ),
+            110 => 
+            array (
+                'id' => 116,
+                'key' => 'delete_gubications',
+                'table_name' => 'gubications',
+                'created_at' => '2024-11-05 15:29:27',
+                'updated_at' => '2024-11-05 15:29:27',
+            ),
         ));
         
         
