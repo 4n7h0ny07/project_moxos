@@ -25,6 +25,7 @@ Route::get('/', function () {
 });
 
 Route::get('/contact', [\App\Http\Controllers\GubicationsController::class, 'publicMap'])->name('contact');
+Route::get('/api/closest-branch', [\App\Http\Controllers\GubicationsController::class, 'getClosestBranch']);
 
 Route::get('/privacity', function () {
     return view('page.privacity');

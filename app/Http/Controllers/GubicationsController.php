@@ -20,6 +20,7 @@ class GubicationsController extends Controller
         $ubicaciones = Gubications::all();
         return view('page.contact', compact('ubicaciones')); // Actualiza la referencia a la vista
     }
+    
     public function getClosestBranch(Request $request)
     {
         $lat = $request->query('lat');
