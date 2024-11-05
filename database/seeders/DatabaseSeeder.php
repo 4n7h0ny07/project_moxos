@@ -24,12 +24,15 @@ class DatabaseSeeder extends Seeder
         $this->call(DataRowsTableSeeder::class);
         $this->call(MenusTableSeeder::class);
         $this->call(MenuItemsTableSeeder::class);
-        //$this->call(RolesTableSeeder::class);
-        //$this->call(UsersTableSeeder::class);
-        //$this->call(UserRolesTableSeeder::class);
+
+        // Seeders de roles y permisos
+        $this->call(RolesTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
+        $this->call(UserRolesTableSeeder::class);
         $this->call(PermissionsTableSeeder::class);
         $this->call(PermissionRoleTableSeeder::class);
 
+        // Otros seeders de configuración
         $this->call(SettingsTableSeeder::class);
 
         // sistema datatabes

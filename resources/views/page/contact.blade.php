@@ -173,11 +173,11 @@
         </script> --}}
         <script>
           // Inicializar el mapa
-          var map = L.map('map').setView([-14.831612, -64.908797], 8); // Ajusta la vista inicial si es necesario
+          var map = L.map('map').setView([-14.831612, -64.908797], 10); // Ajusta la vista inicial si es necesario
   
           // Añadir capa de OpenStreetMap
           L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-              maxZoom: 19,
+              maxZoom: 20,
               attribution: '© OpenStreetMap'
           }).addTo(map);
   
