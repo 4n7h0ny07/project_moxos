@@ -114,4 +114,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('coordenada', [App\Http\Controllers\CoordenadasController::class, 'store'])->name('coordenada.store');
     Route::get('coordenada/show', [App\Http\Controllers\CoordenadasController::class, 'showMap'])->name('coordenada.show');
 
+    Route::get('/zktecodevices/{id}', [App\Http\Controllers\ZktecodeviceController::class, 'show'])->name('voyager.zktecodevices.show');
+    Route::get('/zktecodevices/toggle/{id}', [App\Http\Controllers\ZktecodeviceController::class, 'toggleConnection'])->name('zktecodevices.toggle');
+
 });

@@ -9,6 +9,7 @@ use App\Actions\requerimientosPdf;
 use App\Actions\finiquitoPdf;
 use Illuminate\Support\ServiceProvider;
 use TCG\Voyager\Facades\Voyager;
+use App\Actions\ToggleConnectionAction;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,5 +32,6 @@ class AppServiceProvider extends ServiceProvider
         Voyager::addAction(VacationPdf::class);
         Voyager::addAction(finiquitoPdf::class);
         Voyager::addAction(certificatePdf::class);
+        Voyager::addAction(ToggleConnectionAction::class);
     }
 }
