@@ -173,7 +173,7 @@
         </script> --}}
         <script>
           // Inicializar el mapa
-          var map = L.map('map').setView([-14.831612, -64.908797], 10); // Ajusta la vista inicial si es necesario
+          var map = L.map('map').setView([-14.831612, -64.908797], 10); // Vista inicial general
       
           // Añadir capa de OpenStreetMap
           L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -181,54 +181,60 @@
               attribution: '© OpenStreetMap'
           }).addTo(map);
       
-          // Obtener la ubicación del usuario
+          // Obtener la ubicación del usuario con alta precisión
           if (navigator.geolocation) {
-              navigator.geolocation.getCurrentPosition(function(position) {
-                  var userLat = position.coords.latitude;
-                  var userLon = position.coords.longitude;
+              navigator.geolocation.getCurrentPosition(
+                  function(position) {
+                      var userLat = position.coords.latitude;
+                      var userLon = position.coords.longitude;
+                      var accuracy = position.coords.accuracy; // Precisión en metros
       
-                  // Usar la API de Nominatim para obtener la ciudad del usuario
-                  fetch(`https://nominatim.openstreetmap.org/reverse?lat=${userLat}&lon=${userLon}&format=json`)
-                      .then(response => response.json())
-                      .then(data => {
-                          let city = data.address.city || data.address.town || data.address.village || "tu ubicación";
-                          
-                          // Añadir marcador para la ubicación del usuario con la ciudad detectada
-                          L.marker([userLat, userLon])
-                              .addTo(map)
-                              .bindPopup(`Estás en ${city}`)
-                              .openPopup();
+                      // Usar Nominatim para obtener la ciudad del usuario
+                      fetch(`https://nominatim.openstreetmap.org/reverse?lat=${userLat}&lon=${userLon}&format=json`)
+                          .then(response => response.json())
+                          .then(data => {
+                              let city = data.address.city || data.address.town || data.address.village || "tu ubicación";
+                              
+                              // Añadir marcador para la ubicación del usuario con ciudad detectada
+                              L.marker([userLat, userLon])
+                                  .addTo(map)
+                                  .bindPopup(`Estás en ${city} (Precisión: ${accuracy.toFixed(2)} metros)`)
+                                  .openPopup();
       
-                          // Centrar el mapa en la ubicación del usuario
-                          map.setView([userLat, userLon], 12);
-                      })
-                      .catch(error => {
-                          console.error("Error obteniendo la ciudad:", error);
-                          L.marker([userLat, userLon]).addTo(map).bindPopup("Estás aquí").openPopup();
-                      });
+                              // Ajustar el nivel de zoom en función de la precisión
+                              var zoomLevel = accuracy < 20 ? 16 : accuracy < 100 ? 14 : 12;
+                              map.setView([userLat, userLon], zoomLevel);
+                          })
+                          .catch(error => {
+                              console.error("Error obteniendo la ciudad:", error);
+                              L.marker([userLat, userLon]).addTo(map).bindPopup("Estás aquí").openPopup();
+                          });
       
-                  // Enviar las coordenadas al servidor para encontrar la sucursal más cercana
-                  fetch(`/api/closest-branch?lat=${userLat}&lon=${userLon}`)
-                      .then(response => response.json())
-                      .then(data => {
-                          if (data && data.length > 0) {
-                              // Añadir marcadores para cada sucursal cercana
-                              data.forEach(function(branch) {
-                                  L.marker([branch.latitude, branch.longitude]).addTo(map)
-                                      .bindPopup("<b>" + branch.name + "</b><br>" +
-                                                 "Ciudad: " + (branch.ciudad || 'N/A') + "<br>" +
-                                                 "Dirección: " + (branch.direccion || 'N/A') + "<br>" +
-                                                 "Detalles: " + (branch.details || 'N/A'));
-                              });
-                          } else {
-                              alert("No se encontraron sucursales cercanas.");
-                          }
-                      })
-                      .catch(error => console.error('Error al obtener sucursales:', error));
+                      // Enviar las coordenadas al servidor para encontrar la sucursal más cercana
+                      fetch(`/api/closest-branch?lat=${userLat}&lon=${userLon}`)
+                          .then(response => response.json())
+                          .then(data => {
+                              if (data && data.length > 0) {
+                                  // Añadir marcadores para cada sucursal cercana
+                                  data.forEach(function(branch) {
+                                      L.marker([branch.latitude, branch.longitude]).addTo(map)
+                                          .bindPopup("<b>" + branch.name + "</b><br>" +
+                                                     "Ciudad: " + (branch.ciudad || 'N/A') + "<br>" +
+                                                     "Dirección: " + (branch.direccion || 'N/A') + "<br>" +
+                                                     "Detalles: " + (branch.details || 'N/A'));
+                                  });
+                              } else {
+                                  alert("No se encontraron sucursales cercanas.");
+                              }
+                          })
+                          .catch(error => console.error('Error al obtener sucursales:', error));
       
-              }, function() {
-                  alert("No se pudo obtener la ubicación. Verifica tus permisos de ubicación.");
-              });
+                  },
+                  function() {
+                      alert("No se pudo obtener la ubicación. Verifica tus permisos de ubicación.");
+                  },
+                  { enableHighAccuracy: true } // Solicitar la máxima precisión posible
+              );
           } else {
               alert("Geolocalización no es soportada por este navegador.");
           }
