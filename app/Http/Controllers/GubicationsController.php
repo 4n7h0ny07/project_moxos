@@ -25,28 +25,35 @@ class GubicationsController extends Controller
     {
         $lat = $request->query('lat');
         $lon = $request->query('lon');
+        $city = $request->query('city');
 
-        // Obtener todas las sucursales
-        $ubicaciones = Gubications::all();
+        // Intentar encontrar ubicaciones en la ciudad
+        $ubicaciones = Gubications::where('ciudad', $city)->get();
 
-        $closestBranches = [];
-        $closestDistance = PHP_INT_MAX;
+        // Si no se encuentran ubicaciones en la ciudad, buscar la más cercana
+        if ($ubicaciones->isEmpty()) {
+            $ubicaciones = Gubications::all();
+            $closestBranches = [];
+            $closestDistance = PHP_INT_MAX;
 
-        // Calcular la distancia a cada sucursal
-        foreach ($ubicaciones as $ubicacion) {
-            $distance = $this->haversineGreatCircleDistance($lat, $lon, $ubicacion->latitude, $ubicacion->longitude);
+            foreach ($ubicaciones as $ubicacion) {
+                $distance = $this->haversineGreatCircleDistance($lat, $lon, $ubicacion->latitude, $ubicacion->longitude);
 
-            // Si la distancia es menor que la más cercana encontrada
-            if ($distance < $closestDistance) {
-                $closestDistance = $distance;
-                $closestBranches = [$ubicacion]; // Resetea la lista
-            } elseif ($distance === $closestDistance) {
-                $closestBranches[] = $ubicacion; // Agrega a la lista de cercanas
+                // Verificar si esta es la distancia más cercana encontrada
+                if ($distance < $closestDistance) {
+                    $closestDistance = $distance;
+                    $closestBranches = [$ubicacion]; // Resetear lista con solo esta ubicación
+                } elseif ($distance === $closestDistance) {
+                    $closestBranches[] = $ubicacion; // Agregar a lista si es igual de cercana
+                }
             }
+
+            // Devolver solo las sucursales más cercanas
+            return response()->json($closestBranches);
         }
 
-        // Solo devolver la sucursal más cercana
-        return response()->json($closestBranches);
+        // Si hay ubicaciones en la ciudad, devolver esas ubicaciones
+        return response()->json($ubicaciones);
     }
 
     private function haversineGreatCircleDistance($lat1, $lon1, $lat2, $lon2, $earthRadius = 6371)

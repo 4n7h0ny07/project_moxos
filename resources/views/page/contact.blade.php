@@ -196,27 +196,35 @@
                             var userLon = position.coords.longitude;
                             var accuracy = position.coords.accuracy;
 
-                            // Si el marcador de usuario ya existe, actualízalo
-                            if (userMarker) {
-                                userMarker.setLatLng([userLat, userLon]);
-                            } else {
-                                // Crear el marcador de usuario por primera vez
-                                userMarker = L.marker([userLat, userLon], {
-                                        icon: L.icon({
-                                            iconUrl: '{{ asset('images/marker/default.png') }}', // Personaliza con el ícono que prefieras
-                                            iconSize: [35, 41],
-                                            iconAnchor: [12, 41],
-                                            popupAnchor: [1, -34]
+                            // Usar la geolocalización inversa para obtener la ciudad
+                            fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${userLat}&lon=${userLon}`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    var city = data.address.city || data.address.town || data.address.village ||
+                                        'Unknown';
 
-                                        })
-                                    }).addTo(map)
-                                    .bindPopup(`Estás aquí (Precisión: ${accuracy.toFixed(2)} metros)`).openPopup();
+                                    // Llamar a la función para obtener sucursales cercanas usando la ciudad y coordenadas
+                                    fetchNearbyBranches(userLat, userLon, city);
 
-                                map.setView([userLat, userLon], accuracy < 20 ? 16 : 12);
+                                    // Actualizar o crear el marcador de usuario
+                                    if (userMarker) {
+                                        userMarker.setLatLng([userLat, userLon]);
+                                    } else {
+                                        userMarker = L.marker([userLat, userLon], {
+                                                icon: L.icon({
+                                                    iconUrl: '{{ asset('images/marker/default.png') }}',
+                                                    iconSize: [35, 41],
+                                                    iconAnchor: [12, 41],
+                                                    popupAnchor: [1, -34]
+                                                })
+                                            }).addTo(map)
+                                            .bindPopup(`Estás aquí (Precisión: ${accuracy.toFixed(2)} metros)`)
+                                            .openPopup();
 
-                                // Obtener sucursales cercanas con distancia especificada
-                                fetchNearbyBranches(userLat, userLon, 50); // Cambia 50 si deseas otro límite por defecto
-                            }
+                                        map.setView([userLat, userLon], accuracy < 20 ? 16 : 12);
+                                    }
+                                })
+                                .catch(error => console.error('Error al obtener la ciudad:', error));
                         },
                         function() {
                             alert("No se pudo obtener la ubicación. Verifica tus permisos de ubicación.");
@@ -229,55 +237,33 @@
                 }
             }
 
-            // Función para obtener la sucursal más cercana
-            function fetchNearbyBranches(lat, lon) {
-                fetch(`/api/closest-branch?lat=${lat}&lon=${lon}`)
+            function fetchNearbyBranches(lat, lon, city) {
+                fetch(`/api/closest-branch?lat=${lat}&lon=${lon}&city=${city}`)
                     .then(response => response.json())
                     .then(data => {
-                        console.log(data); // Verifica los datos que estás recibiendo del servidor
+                        console.log(data);
                         if (data.length > 0) {
-                            // Suponiendo que solo se obtiene una sucursal más cercana, toma el primer elemento de la respuesta
-                            var branch = data[0];
+                            data.forEach(branch => {
+                                var marker = L.marker([branch.latitude, branch.longitude]).addTo(map)
+                                    .bindPopup(
+                                        `<b>${branch.name}</b><br>Ciudad: ${branch.ciudad || 'N/A'}<br>Dirección: ${branch.direccion || 'N/A'}`
+                                        )
+                                    .openPopup();
 
-                            // Añadir marcador de la sucursal más cercana al mapa
-                            L.marker([branch.latitude, branch.longitude]).addTo(map)
-                                .bindPopup(
-                                    `<b>${branch.name}</b><br>Ciudad: ${branch.ciudad || 'N/A'}<br>Dirección: ${branch.direccion || 'N/A'}`
-                                    )
-                                .openPopup();
-
-                            // Opcional: ajustar el mapa para mostrar la sucursal más cercana
-                            map.setView([branch.latitude, branch.longitude], 16);
-
-                            // Mostrar datos de la sucursal en HTML
-                            document.getElementById("branch-name").innerText = branch.name || 'N/A';
-                            document.getElementById("branch-city").innerText = branch.ciudad || 'N/A';
-                            document.getElementById("branch-address").innerText = branch.direccion || 'N/A';
+                                // Agregar un evento de clic en el marcador para actualizar HTML
+                                marker.on('click', function() {
+                                    document.getElementById("branch-name").innerText = branch.name || 'N/A';
+                                    document.getElementById("branch-city").innerText = branch.ciudad ||
+                                        'N/A';
+                                    document.getElementById("branch-address").innerText = branch
+                                        .direccion || 'N/A';
+                                });
+                            });
                         } else {
                             alert("No se encontraron sucursales cercanas.");
                         }
                     })
                     .catch(error => console.error('Error al obtener sucursales:', error));
-            }
-
-            // Función para trazar la ruta a una sucursal
-            function routeToBranch(userLat, userLon, branchLat, branchLon) {
-                // Eliminar la ruta anterior si existe
-                if (routingControl) {
-                    routingControl.remove();
-                }
-
-                routingControl = L.Routing.control({
-                    waypoints: [
-                        L.latLng(userLat, userLon),
-                        L.latLng(branchLat, branchLon)
-                    ],
-                    routeWhileDragging: true,
-                    show: true,
-                    createMarker: function() {
-                        return null;
-                    }
-                }).addTo(map);
             }
 
             // Iniciar el seguimiento en tiempo real al cargar el mapa
