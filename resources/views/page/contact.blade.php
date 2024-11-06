@@ -204,8 +204,10 @@
                                 userMarker = L.marker([userLat, userLon], {
                                         icon: L.icon({
                                             iconUrl: '{{ asset('images/marker/default.png') }}', // Personaliza con el ícono que prefieras
-                                            iconSize: [25, 41],
-                                            iconAnchor: [12, 41]
+                                            iconSize: [35, 41], 
+                                            iconAnchor: [12, 41], 
+                                            popupAnchor: [1, -34]
+                                            
                                         })
                                     }).addTo(map)
                                     .bindPopup(`Estás aquí (Precisión: ${accuracy.toFixed(2)} metros)`).openPopup();
