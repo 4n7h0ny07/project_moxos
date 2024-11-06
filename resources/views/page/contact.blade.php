@@ -8,7 +8,7 @@
         <div class="container-fluid container-xl position-relative d-flex align-items-center">
             <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
             <!-- Añadir Leaflet Routing Machine -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+            <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
             <a href="/" class="logo d-flex align-items-center me-auto">
 
                 <!-- Uncomment the line below if you also wish to use an image logo -->
@@ -89,24 +89,24 @@
                     <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="300">
                         <i class="bi bi-geo-alt flex-shrink-0"></i>
                         <div>
-                            <h3>Address</h3>
-                            <p>A108 Adam Street, New York, NY 535022</p>
+                            <h3>Sucursal</h3>
+                            <p><span id="branch-name">Cargando...</span></p>
                         </div>
                     </div><!-- End Info Item -->
 
                     <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="400">
                         <i class="bi bi-telephone flex-shrink-0"></i>
                         <div>
-                            <h3>Call Us</h3>
-                            <p>+1 5589 55488 55</p>
+                            <h3>Ciudad</h3>
+                            <p><span id="branch-city">Cargando...</span></p>
                         </div>
                     </div><!-- End Info Item -->
 
                     <div class="info-item d-flex" data-aos="fade-up" data-aos-delay="500">
                         <i class="bi bi-envelope flex-shrink-0"></i>
                         <div>
-                            <h3>Email Us</h3>
-                            <p>info@example.com</p>
+                            <h3>Direccion</h3>
+                            <p><span id="branch-address">Cargando...</span></p>
                         </div>
                     </div><!-- End Info Item -->
                 </div>
@@ -177,15 +177,16 @@
         </script> --}}
         <script>
             var map = L.map('map').setView([-14.831612, -64.908797], 10);
-        
+
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 20,
                 attribution: '© OpenStreetMap'
             }).addTo(map);
-        
+
             var routingControl;
             var userMarker; // Variable para el marcador de usuario en tiempo real
-        
+
+            // Función para iniciar el seguimiento en tiempo real
             // Función para iniciar el seguimiento en tiempo real
             function startTracking() {
                 if (navigator.geolocation) {
@@ -194,59 +195,72 @@
                             var userLat = position.coords.latitude;
                             var userLon = position.coords.longitude;
                             var accuracy = position.coords.accuracy;
-        
+
                             // Si el marcador de usuario ya existe, actualízalo
                             if (userMarker) {
                                 userMarker.setLatLng([userLat, userLon]);
-                                userMarker.bindPopup(`Estás aquí (Precisión: ${accuracy.toFixed(2)} metros)`).openPopup();
                             } else {
                                 // Crear el marcador de usuario por primera vez
-                                userMarker = L.marker([userLat, userLon]).addTo(map)
+                                userMarker = L.marker([userLat, userLon], {
+                                        icon: L.icon({
+                                            iconUrl: 'path-to-user-icon.png', // Personaliza con el ícono que prefieras
+                                            iconSize: [25, 41],
+                                            iconAnchor: [12, 41]
+                                        })
+                                    }).addTo(map)
                                     .bindPopup(`Estás aquí (Precisión: ${accuracy.toFixed(2)} metros)`).openPopup();
-        
+
                                 map.setView([userLat, userLon], accuracy < 20 ? 16 : 12);
-        
-                                // Obtener sucursales cercanas por primera vez
-                                fetchNearbyBranches(userLat, userLon);
+
+                                // Obtener sucursales cercanas con distancia especificada
+                                fetchNearbyBranches(userLat, userLon, 50); // Cambia 50 si deseas otro límite por defecto
                             }
                         },
                         function() {
                             alert("No se pudo obtener la ubicación. Verifica tus permisos de ubicación.");
-                        },
-                        { enableHighAccuracy: true }
+                        }, {
+                            enableHighAccuracy: true
+                        }
                     );
                 } else {
                     alert("Geolocalización no es soportada por este navegador.");
                 }
             }
-        
-            // Función para obtener sucursales cercanas
+
+            // Función para obtener la sucursal más cercana
             function fetchNearbyBranches(lat, lon) {
                 fetch(`/api/closest-branch?lat=${lat}&lon=${lon}`)
                     .then(response => response.json())
                     .then(data => {
-                        if (data && data.length > 0) {
-                            data.forEach(function(branch) {
-                                L.marker([branch.latitude, branch.longitude]).addTo(map)
-                                    .bindPopup("<b>" + branch.name + "</b><br>" +
-                                               "Ciudad: " + (branch.ciudad || 'N/A') + "<br>" +
-                                               "Dirección: " + (branch.direccion || 'N/A') + "<br>" +
-                                               `<button onclick="routeToBranch(${lat}, ${lon}, ${branch.latitude}, ${branch.longitude})">Cómo llegar</button>`);
-                            });
+                        if (data) {
+                            // Actualizar los elementos HTML con los datos de la sucursal más cercana
+                            document.getElementById("branch-name").innerText = data.name || 'N/A';
+                            document.getElementById("branch-city").innerText = data.ciudad || 'N/A';
+                            document.getElementById("branch-address").innerText = data.direccion || 'N/A';
+                            document.getElementById("branch-distance").innerText = data.distance ?
+                                `${data.distance.toFixed(2)} km` :
+                                'N/A';
+
+                            // Añadir marcador de la sucursal más cercana al mapa
+                            L.marker([data.latitude, data.longitude]).addTo(map)
+                                .bindPopup(
+                                    `<b>${data.name}</b><br>Ciudad: ${data.ciudad || 'N/A'}<br>Dirección: ${data.direccion || 'N/A'}`
+                                    )
+                                .openPopup();
                         } else {
                             alert("No se encontraron sucursales cercanas.");
                         }
                     })
                     .catch(error => console.error('Error al obtener sucursales:', error));
             }
-        
+
             // Función para trazar la ruta a una sucursal
             function routeToBranch(userLat, userLon, branchLat, branchLon) {
                 // Eliminar la ruta anterior si existe
                 if (routingControl) {
                     routingControl.remove();
                 }
-        
+
                 routingControl = L.Routing.control({
                     waypoints: [
                         L.latLng(userLat, userLon),
@@ -254,10 +268,12 @@
                     ],
                     routeWhileDragging: true,
                     show: true,
-                    createMarker: function() { return null; }
+                    createMarker: function() {
+                        return null;
+                    }
                 }).addTo(map);
             }
-        
+
             // Iniciar el seguimiento en tiempo real al cargar el mapa
             startTracking();
         </script>
