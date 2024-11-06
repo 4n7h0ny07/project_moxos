@@ -204,10 +204,10 @@
                                 userMarker = L.marker([userLat, userLon], {
                                         icon: L.icon({
                                             iconUrl: '{{ asset('images/marker/default.png') }}', // Personaliza con el ícono que prefieras
-                                            iconSize: [35, 41], 
-                                            iconAnchor: [12, 41], 
+                                            iconSize: [35, 41],
+                                            iconAnchor: [12, 41],
                                             popupAnchor: [1, -34]
-                                            
+
                                         })
                                     }).addTo(map)
                                     .bindPopup(`Estás aquí (Precisión: ${accuracy.toFixed(2)} metros)`).openPopup();
@@ -234,21 +234,25 @@
                 fetch(`/api/closest-branch?lat=${lat}&lon=${lon}`)
                     .then(response => response.json())
                     .then(data => {
-                        if (data) {
-                            // Actualizar los elementos HTML con los datos de la sucursal más cercana
-                            document.getElementById("branch-name").innerText = data.name || 'N/A';
-                            document.getElementById("branch-city").innerText = data.ciudad || 'N/A';
-                            document.getElementById("branch-address").innerText = data.direccion || 'N/A';
-                            document.getElementById("branch-distance").innerText = data.distance ?
-                                `${data.distance.toFixed(2)} km` :
-                                'N/A';
+                        console.log(data); // Verifica los datos que estás recibiendo del servidor
+                        if (data.length > 0) {
+                            // Suponiendo que solo se obtiene una sucursal más cercana, toma el primer elemento de la respuesta
+                            var branch = data[0];
 
                             // Añadir marcador de la sucursal más cercana al mapa
-                            L.marker([data.latitude, data.longitude]).addTo(map)
+                            L.marker([branch.latitude, branch.longitude]).addTo(map)
                                 .bindPopup(
-                                    `<b>${data.name}</b><br>Ciudad: ${data.ciudad || 'N/A'}<br>Dirección: ${data.direccion || 'N/A'}`
+                                    `<b>${branch.name}</b><br>Ciudad: ${branch.ciudad || 'N/A'}<br>Dirección: ${branch.direccion || 'N/A'}`
                                     )
                                 .openPopup();
+
+                            // Opcional: ajustar el mapa para mostrar la sucursal más cercana
+                            map.setView([branch.latitude, branch.longitude], 16);
+
+                            // Mostrar datos de la sucursal en HTML
+                            document.getElementById("branch-name").innerText = branch.name || 'N/A';
+                            document.getElementById("branch-city").innerText = branch.ciudad || 'N/A';
+                            document.getElementById("branch-address").innerText = branch.direccion || 'N/A';
                         } else {
                             alert("No se encontraron sucursales cercanas.");
                         }

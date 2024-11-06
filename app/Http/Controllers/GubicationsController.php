@@ -26,24 +26,27 @@ class GubicationsController extends Controller
         $lat = $request->query('lat');
         $lon = $request->query('lon');
 
-        if (!$lat || !$lon) {
-            return response()->json(['error' => 'Latitud y longitud son requeridas.'], 400);
-        }
-
+        // Obtener todas las sucursales
         $ubicaciones = Gubications::all();
-        $closestBranch = null;
+
+        $closestBranches = [];
         $closestDistance = PHP_INT_MAX;
 
+        // Calcular la distancia a cada sucursal
         foreach ($ubicaciones as $ubicacion) {
             $distance = $this->haversineGreatCircleDistance($lat, $lon, $ubicacion->latitude, $ubicacion->longitude);
 
+            // Si la distancia es menor que la más cercana encontrada
             if ($distance < $closestDistance) {
                 $closestDistance = $distance;
-                $closestBranch = $ubicacion;
+                $closestBranches = [$ubicacion]; // Resetea la lista
+            } elseif ($distance === $closestDistance) {
+                $closestBranches[] = $ubicacion; // Agrega a la lista de cercanas
             }
         }
 
-        return response()->json($closestBranch);
+        // Solo devolver la sucursal más cercana
+        return response()->json($closestBranches);
     }
 
     private function haversineGreatCircleDistance($lat1, $lon1, $lat2, $lon2, $earthRadius = 6371)
