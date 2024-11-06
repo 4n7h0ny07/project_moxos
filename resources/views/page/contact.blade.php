@@ -203,7 +203,7 @@
                                 // Crear el marcador de usuario por primera vez
                                 userMarker = L.marker([userLat, userLon], {
                                         icon: L.icon({
-                                            iconUrl: 'path-to-user-icon.png', // Personaliza con el ícono que prefieras
+                                            iconUrl: '{{ asset('images/marker/default.png') }}', // Personaliza con el ícono que prefieras
                                             iconSize: [25, 41],
                                             iconAnchor: [12, 41]
                                         })
