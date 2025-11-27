@@ -85,14 +85,14 @@
     </table>
     <table width="100%">
         <tr>
-            <td width="65%">
+            <td width="55%">
                 <div class="col-md-7" style="font-size: 10pt; color:rgba(10, 10, 105, 0.856)">
                     <span> Solicitante: <b style="color: black important;">{{ $altas->user->name }}</b></span>
                 </div>
             </td>
-            <td width="35%">
+            <td width="45%">
                 <div class="col-md-5" style="font-size: 10pt; color:rgba(10, 10, 105, 0.856)">
-                    <span>Fecha Solicitud: <b style="color: black important;"> @php echo date('d F Y', strtotime($altas->created_at)); @endphp </b></span>
+                    <span>Fecha Solicitud: <b style="color: black important;">{{ \Carbon\Carbon::parse($altas->created_at)->translatedFormat('d \\de F \\de Y') }}</b></span> </b></span>
                 </div>
             </td>
         </tr>

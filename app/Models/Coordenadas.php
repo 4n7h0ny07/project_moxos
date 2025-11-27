@@ -52,3 +52,6 @@ class Coordenadas extends Model
         });
     }
 }
+
+
+//INSERT INTO `permissions` (`id`, `key`, `table_name`, `created_at`, `updated_at`) VALUES (NULL, 'read_coordenadas', 'coordenadas', NULL, NULL), (NULL, 'edit_coordenadas', 'coordenadas', NULL, NULL), (NULL, 'add_coordenada\r\n', 'coordenadas', NULL, NULL), (NULL, 'delete_coordenadas', 'coordenadas', NULL, NULL);

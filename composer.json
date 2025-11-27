@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.8",
         "mehedijaman/laravel-zkteco": "^1.0",
         "orangehill/iseed": "^3.0",
+        "simplesoftwareio/simple-qrcode": "^4.2",
         "tcg/voyager": "^1.7",
         "webklex/laravel-imap": "^5.3"
     },

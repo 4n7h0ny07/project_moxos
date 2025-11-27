@@ -181,27 +181,28 @@
     </table>
     <table width="100%">
         <tr>
-            <td width="65%">
+            <td width="55%">
                 <div class="col-md-7" style="font-size: 10pt; color:rgba(10, 10, 105, 0.856)">
                     <span> Solicitante: <b style="color: black important;">{{ $requerimientos->user->name }}</b></span>
                 </div>
             </td>
-            <td width="35%">
+            <td width="45%">
                 <div class="col-md-5" style="font-size: 10pt; color:rgba(10, 10, 105, 0.856)">
-                    <span>Fecha Solicitud: <b style="color: black important;"> @php echo date('d F Y', strtotime($requerimientos->created_at)); @endphp </b></span>
+                    <span>Fecha Solicitud: <b style="color: black important;"> {{ \Carbon\Carbon::parse($requerimientos->created_at)->translatedFormat('d \\de F \\de Y') }}</b></span> </b></span>
+                    
                 </div>
             </td>
         </tr>
     </table>
     <table width="100%">
         <thead>
-            <th colspan="2" class="thead-pdf">
+            <th colspan="3" class="thead-pdf">
                 DESCRIPCION DEL PRODUCTO, CANTIDAD Y PRECIO
             </th>
         </thead>
         <tbody class="tbody-pdf">
             <tr>
-                <td colspan="2" heigth="74mm">
+                <td colspan="3" heigth="74mm">
                     <div style="height: 74mm; font-size:11pt; text-align:justify;">
                         {!! $requerimientos->detail_requerimient !!}
                     </div>
@@ -210,7 +211,7 @@
             </tr>
             <tr style="border: rgba(10, 10, 105, 0.856) 0.5em soild;">
 
-                <td width="35%">
+                <td width="30%">
 
                     <div style="width: 100%">
                         <p style="color: rgba(10, 10, 105, 0.856); font-size:10pt "><b
@@ -349,7 +350,7 @@
                     </div>
 
                 </td>
-                <td width="65%">
+                <td width="45%">
                     <div style="width: 100%;">
                         <p style="color: rgba(10, 10, 105, 0.856); font-size:9pt; "><b class="text-right">Proveedor:
                             </b></p>
@@ -381,6 +382,11 @@
                         <span style="font-size:11pt; text-align:right !important;"><b
                                 class="text-right">@php  echo number_format($requerimientos->total_payment,2);@endphp</b></span>
                     </div>
+                </td>
+                <td width="25%">
+                    <p style="color: rgba(10, 10, 105, 0.856); font-size:10pt "><b
+                        style="text-align: center !important">Qr Data: </b></p>
+                    <img src="data:image/png;base64,{{ $QrCode }}" width="125" alt="Código QR">
                 </td>
             </tr>
             <tr style="border: ridge; border-radius:0.5em; border-color:rgba(10, 10, 105, 0.856);">

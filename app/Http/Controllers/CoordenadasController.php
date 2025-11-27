@@ -27,47 +27,40 @@ class CoordenadasController extends Controller
         $cobradores = Cobradores::all();
         // Asegúrate de que el modelo Cobradores exista y esté configurado correctamente
 
-        return view('vendor.voyager.coordenada.index', compact('personas', 'cobradores', 'promotores'));
+        return view('vendor.voyager.coordenadas.index', compact('personas', 'cobradores', 'promotores'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function show()
+    public function show(Request $request)
     {
-        // Obtener todas las personas que NO están en la tabla coordenadas
-        $personas = Personas::whereNotIn('id', Coordenadas::select('personas_id'))->get();
-
-        // Obtener todos los promotores y cobradores
-        $promotores = Promotores::get();
-        // Asegúrate de que el modelo Promotores exista y esté configurado correctamente
-
-        $cobradores = Cobradores::with('grupos')->get();
-        // Asegúrate de que el modelo Cobradores exista y esté configurado correctamente
-
-
-
-        return view('vendor.voyager.coordenada.show', compact('personas', 'cobradores', 'promotores'));
-    }
-
-    public function showMap(Request $request)
-    {
-        $cobradorId = base64_decode($request->input('cobrador_id')); // Recibe el ID del cobrador desde el formulario
-
-        // Obtener las coordenadas filtradas o todas si no se ha seleccionado un cobrador específico
-        $coordenadasQuery = \App\Models\Coordenadas::with('persona', 'cobrador', 'promotor');
-
-        // Aquí verificamos si el ID del cobrador es nulo o vacío
+        // 🔹 Recibir cobrador_id (si existe), viene en base64
+        $cobradorId = $request->has('cobrador_id')
+            ? base64_decode($request->input('cobrador_id'))
+            : null;
+    
+        // 🔹 Obtener coordenadas (todas o filtradas)
+        $coordenadasQuery = Coordenadas::with('persona', 'cobrador', 'promotor');
+    
         if (!empty($cobradorId)) {
             $coordenadasQuery->where('cobrador_id', $cobradorId);
         }
-
+    
         $coordenadas = $coordenadasQuery->get();
-
-        // Obtener la lista de cobradores para el dropdown
-        $cobradores = \App\Models\Cobradores::all();
-
-        return view('vendor.voyager.coordenada.show', compact('coordenadas', 'cobradores', 'cobradorId'));
+    
+        // 🔹 Listas para selects
+        $cobradores  = Cobradores::with('grupos')->get();
+        $promotores  = Promotores::get();
+        $personas    = Personas::whereNotIn('id', Coordenadas::select('personas_id'))->get();
+    
+        return view('vendor.voyager.coordenadas.show', compact(
+            'personas',
+            'cobradores',
+            'promotores',
+            'coordenadas',
+            'cobradorId'
+        ));
     }
 
     /**
@@ -100,7 +93,7 @@ class CoordenadasController extends Controller
 
 
 
-            return redirect()->route('coodenada.index')->with('success', 'Coordenadas guardadas con éxito');
+            return redirect()->route('coodenadas.index')->with('success', 'Coordenadas guardadas con éxito');
         }
     }
 }

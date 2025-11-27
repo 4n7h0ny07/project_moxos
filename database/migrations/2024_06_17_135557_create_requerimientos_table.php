@@ -22,8 +22,8 @@ return new class extends Migration
             $table->decimal('total_payment', 10, 2)->nullable();
             $table->decimal('saldo_payment', 10, 2)->nullable();
             $table->string('document_requerimient')->nullable();
-            $table->string('detail_requerimient')->nullable();
-            $table->string('observation_requerimient')->nullable();
+            $table->longText('detail_requerimient')->nullable();
+            $table->longText('observation_requerimient')->nullable();
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('personas_id')->references('id')->on('personas');

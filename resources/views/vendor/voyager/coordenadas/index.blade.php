@@ -26,7 +26,7 @@
                         <div class="col-md-4">
                             <div class="container mt-6">
                                 <h2>Registrar Coordenadas</h2>
-                                <form method="POST" action="{{ route('coordenada.store') }}">
+                                <form method="POST" action="{{ route('coordenadas.store') }}">
                                     @csrf
                                     <!-- Selección de Persona -->
                                     <div class="form-group ">
@@ -89,7 +89,7 @@
 
                                     <!-- Botones de acción -->
                                     <button type="submit" class="btn btn-primary">Guardar Coordenadas</button>
-                                    <a href="{{ route('coordenada.show') }}" class="text-success">Ver Registros</a>
+                                    <a href="{{ route('coordenadas.show') }}" class="text-success">Ver Registros</a>
                                 </form>
                             </div>
                         </div>

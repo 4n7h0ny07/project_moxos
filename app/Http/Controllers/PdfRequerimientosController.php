@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Requerimientos;
 use PDF;
 use Illuminate\Http\Request;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class PdfRequerimientosController extends Controller
 {
@@ -21,12 +22,21 @@ class PdfRequerimientosController extends Controller
 
         $requerimientos = Requerimientos::with(['personas', 'user'])->findOrfail($id);
 
+        $textoLimpio = html_entity_decode(strip_tags($requerimientos->detail_requerimient));
+        $textoLimpio = strtoupper($textoLimpio); // Convertir a MAYÚSCULAS
+        
+        if (empty($textoLimpio)) {
+            $textoLimpio = 'https://serna.moxos.com.bo/admin/login';
+        }
+
+        $qrCode = base64_encode(QrCode::size(200)->generate($textoLimpio));
 
         // Obtener la URL del logo
         $logoUrl = setting('site.logo');
 
         // Generar el código QR
         //$qrCode = base64_encode(QrCode::size(100)->generate('wpBNPetuHPfaGg4sQL4XbWoxn0tCg3oZH1/ynlvqCC4X2GnCX1F9rK9CLjWFFz9sT6YvsLNHnsaGNU3uPLu2vFz1xag0gIGwhJjY8tf9PpmS6ajbj5jxxYdFovui/N0X0HI0am7oxfhiXSRNz9mKIlWhHu18FJxMquZl60+HNRHt+8r6DLsLNQjJ4q8jRJAMq15wV4VUEr4ubuAJN+AKyGK6aOD+MwEWggEtHD8jQ9PAJg7tYkhmEu2a/Gp0YctATrFjp5k7SsL1F3qUlE0CUenPZEmFszU7Q2XBzrx5pPQ5Vu9V8gwUPLGLELmm39BFxHokezLBH0D3ZNNvfFh4TQ==|6E2E3DC94E4114DAFC48F6E2'));
+        //$qrCode = base64_encode(QrCode::size(100)->generate($requerimientos->detail_requerimient));
         
         // compras' => $compras,
         // 'personas' => $compras->personas,
@@ -40,14 +50,16 @@ class PdfRequerimientosController extends Controller
         //datos para pasar a la vista
         $data = [
             'requerimientos' => $requerimientos,
-            'logoUrl' => $logoUrl
+            'logoUrl' => $logoUrl,
+            'QrCode' => $qrCode
+
         ];
 
         $pdf = PDF::loadView('pdf.requerimientos', $data)            
             ->setPaper('letter');
 
-        //return $pdf->stream('Req_' . $requerimientos->number_requerimient . '.pdf');
-        return $pdf->download('Frm_Req_' . $requerimientos->number_requerimient . '.pdf');
+        return $pdf->stream('Req_' . $requerimientos->number_requerimient . '.pdf');
+        //return $pdf->download('Frm_Req_' . $requerimientos->number_requerimient . '.pdf');
     }
     /**
      * Show the form for creating a new resource.

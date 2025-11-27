@@ -18,6 +18,7 @@ class requerimientosPdf extends AbstractAction{
     {
         return [
             'class' => 'btn btn-sm btn-success pull-right',
+            'target' => '_blank', //
         ];
     }
 

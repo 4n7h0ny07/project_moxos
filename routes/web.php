@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\Marcas;
 use App\Models\Producto;
+use App\Models\Promotores;
 use Illuminate\Support\Facades\Route;
 use TCG\Voyager\Http\Controllers\VoyagerMediaController;
 
@@ -48,8 +50,11 @@ Route::get('/motorcycle', function () {
 
 route::get('/', function () {
     $producto = Producto::with('Types')->get();
+    $marcas = Marcas::limit(6)->get();   
+    $agentes = Promotores::all(); 
+    
 
-    return view('page.index', compact('producto'));
+    return view('page.index', compact('producto', 'marcas', 'agentes'));
 });
 
 
@@ -77,6 +82,12 @@ Route::post('/calculator', [App\Http\Controllers\CalculatorController::class, 'c
 
 // })->name('admin.login');
 
+
+Route::prefix('home')->group(function () {
+
+    Route::Get('/', [App\Http\Controllers\UserapiController::class, 'index']);
+    Route::Get('/{code}', [App\Http\Controllers\UserapiController::class, 'show']);
+});
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
@@ -111,11 +122,14 @@ Route::group(['prefix' => 'admin'], function () {
 
  
   
-    Route::get('coodenada', [App\Http\Controllers\CoordenadasController::class, 'index'])->name('coodenada.index');
-    Route::post('coordenada', [App\Http\Controllers\CoordenadasController::class, 'store'])->name('coordenada.store');
-    Route::get('coordenada/show', [App\Http\Controllers\CoordenadasController::class, 'showMap'])->name('coordenada.show');
+    Route::get('coodenadas', [App\Http\Controllers\CoordenadasController::class, 'index'])->name('coodenadas.index');
+    Route::post('coordenadas', [App\Http\Controllers\CoordenadasController::class, 'store'])->name('coordenadas.store');
+    Route::get('coordenadas/show', [App\Http\Controllers\CoordenadasController::class, 'showMap'])->name('coordenadas.show');
 
     Route::get('/zktecodevices/{id}', [App\Http\Controllers\ZktecodeviceController::class, 'show'])->name('voyager.zktecodevices.show');
     Route::get('/zktecodevices/toggle/{id}', [App\Http\Controllers\ZktecodeviceController::class, 'toggleConnection'])->name('zktecodevices.toggle');
 
 });
+
+
+// Intente ser Normal, pero me aburrí, y volvi a ser yo mismo.

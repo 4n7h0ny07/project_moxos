@@ -192,9 +192,9 @@
                         <tbody>
                             <tr>
                                 <td class="td-th" style="font-size:9.5pt; text-align:justify; width: 214px"><span>A) MESES</span></td>
-                                <td class="td-th" style="font-size:9.5pt; text-align:center; width: 110px"><span>{{$mes_uno}}</span></td>
-                                <td class="td-th" style="font-size:9.5pt; text-align:center; width: 110px"><span>{{$mes_dos}}</span></td>
-                                <td class="td-th" style="font-size:9.5pt; text-align:center; width: 110px"><span>{{$mes_tres}}</span></td>
+                                <td class="td-th" style="font-size:9.5pt; text-align:center; width: 110px"><span>{{ \Carbon\Carbon::parse($mes_uno)->translatedFormat('F \\de Y') }}</span></td>
+                                <td class="td-th" style="font-size:9.5pt; text-align:center; width: 110px"><span>{{ \Carbon\Carbon::parse($mes_dos)->translatedFormat('F \\de Y') }}</span></td>
+                                <td class="td-th" style="font-size:9.5pt; text-align:center; width: 110px"><span>{{ \Carbon\Carbon::parse($mes_tres)->translatedFormat('F \\de Y') }}</span></td>
                                 <td class="td-th" style="font-size:9.5pt; text-align:justify; width: 140px"><span>TOTALES</span></td>
                             </tr>
                         </tbody>
@@ -306,7 +306,7 @@
                             $total_dos = $finiquitos->salario_dos + $finiquitos->antiguedad_dos + $finiquitos->bono_dos + $finiquitos->comisiones_dos + $finiquitos->otros_dos;
                             $total_tres = $finiquitos->salario_tres + $finiquitos->antiguedad_tres + $finiquitos->bono_tres + $finiquitos->comisiones_tres + $finiquitos->otros_tres;
 
-                            $promedio_salary = ($total_uno + $total_dos + $total_tres) / 3;
+                            $promedio_salary = (($total_uno + $total_dos + $total_tres) / 3) * 3;
 
 
                     @endphp

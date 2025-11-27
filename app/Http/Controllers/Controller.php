@@ -13,9 +13,20 @@ use Illuminate\Support\Facades\Storage;
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
+    
+    public function shouldActionDisplayOnRow($row)
+    {
+        // Mostrar el botón solo si el usuario tiene permiso
+        return auth()->user()->hasPermission('vendor.voyager.mysqldata.index');
+    }
 
     public function index()
+
     {
+          // Verificar si el usuario tiene el permiso
+          if (!auth()->user()->hasPermission('vendor.voyager.mysqldata.index')) {
+            abort(403); // Acceso denegado
+        }
         // Obtener todas las tablas de la base de datos
         $tables = DB::select('SHOW TABLES');
         $tableNames = array_map('current', $tables); // Extraer los nombres de las tablas
