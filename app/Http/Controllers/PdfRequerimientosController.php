@@ -55,10 +55,10 @@ class PdfRequerimientosController extends Controller
 
         ];
 
-        $pdf = PDF::loadView('pdf.requerimientos', $data)            
+        $pdf = PDF::loadView('pdf.requerimientos', $data)
             ->setPaper('letter');
 
-        return $pdf->stream('Req_' . $requerimientos->number_requerimient . '.pdf');
+        return $pdf->stream('frm_01' . $requerimientos->number_requerimient . '.pdf');
         //return $pdf->download('Frm_Req_' . $requerimientos->number_requerimient . '.pdf');
     }
     /**

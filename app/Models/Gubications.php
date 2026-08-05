@@ -17,7 +17,7 @@ class Gubications extends Model
 
     public function grupo()
     {
-        return $this->belongsTo(Grupo::class);
+        return $this->belongsTo(Grupos::class);
     }
 
     public static function boot()

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use TCG\Voyager\Traits\VoyagerUser;
+use App\Models\Activo;
 
 class Personas extends Model
 {
@@ -15,6 +16,28 @@ class Personas extends Model
     protected $dates = ['deleted_at'];
 
     protected $table = 'personas'; //
+
+    protected $fillable = [
+        'grupos_id',
+        'image',
+        'code',
+        'names',
+        'apaterno',
+        'amaterno',
+        'fecha_nacimiento',
+        'numero_carnet',
+        'complemento',
+        'expedito',
+        'estado_civil',
+        'numero_celular',
+        'numero_telefono',
+        'email',
+        'direccion',
+        'email_work',
+        'cargo_work',
+        'salario_work',
+        'user_id'
+    ];
 
     public function getActions()
     {
@@ -46,6 +69,11 @@ class Personas extends Model
     public function vacations()
     {
         return $this->hasMany(Vacations::class, 'personas_id');
+    }
+
+    public function activo()
+    {
+        return $this->belongsTo(Activo::class, 'personas_id');
     }
 
     public static function boot()

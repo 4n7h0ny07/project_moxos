@@ -24,7 +24,7 @@ use TCG\Voyager\Http\Controllers\VoyagerMediaController;
 
 Route::get('/', function () {
     return view('page.index');
-});
+})->name('index');
 
 Route::get('/contact', [\App\Http\Controllers\GubicationsController::class, 'publicMap'])->name('contact');
 Route::get('/api/closest-branch', [\App\Http\Controllers\GubicationsController::class, 'getClosestBranch']);
@@ -50,8 +50,8 @@ Route::get('/motorcycle', function () {
 
 route::get('/', function () {
     $producto = Producto::with('Types')->get();
-    $marcas = Marcas::limit(6)->get();   
-    $agentes = Promotores::all(); 
+    $marcas = Marcas::limit(6)->get();
+    $agentes = Promotores::all();
     
 
     return view('page.index', compact('producto', 'marcas', 'agentes'));
@@ -106,7 +106,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::get('/altas/{id}/pdf', [App\Http\Controllers\PdfAltasController::class, 'generatePdf'])->name('altas.pdf');
 
-    Route::get('/bajas/{id}/pdf', [App\Http\Controllers\PdfAltasController::class, 'generatePdf'])->name('bajas.pdf');
+    Route::get('/bajas/{id}/pdf', [App\Http\Controllers\PdfBajaController::class, 'generatePdf'])->name('bajas.pdf');
 
     Route::get('mysqldata', [App\Http\Controllers\Controller::class, 'index'])->name('mysqldata.index');
     Route::post('export-tables', [App\Http\Controllers\Controller::class, 'exportTables'])->name('export.tables');

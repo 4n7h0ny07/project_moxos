@@ -151,24 +151,23 @@
                                 <select class="form-control" name="tipo_credito" required>
                                     <option value="serna"
                                         {{ old('tipoCredito', $tipoCredito ?? '') == 'serna' ? 'selected' : '' }}>Motos
-                                        Serna, Keeway y Kymco ({{ setting('calculadora.motos_serna') }} %)</option>
+                                        Serna, Keeway y Kymco </option>
                                     <option value="bicicletas"
                                         {{ old('tipoCredito', $tipoCredito ?? '') == 'bicicletas' ? 'selected' : '' }}>
                                         Bicicletas
-                                        ({{ setting('calculadora.bicicletas_bike') }} %)</option>
+                                        </option>
                                     <option value="gama_media"
                                         {{ old('tipoCredito', $tipoCredito ?? '') == 'gama_media' ? 'selected' : '' }}>
                                         Motos
                                         Benelli Gama
-                                        Media ({{ setting('calculadora.motos_media_benelli') }} %)</option>
+                                        Media </option>
                                     <option value="benelli"
                                         {{ old('tipoCredito', $tipoCredito ?? '') == 'benelli' ? 'selected' : '' }}>
-                                        Motos Benelli ({{ setting('calculadora.motos_benelli') }} %)</option>
+                                        Motos Benelli </option>
                                     <option value="electrodomesticos_muebles"
                                         {{ old('tipoCredito', $tipoCredito ?? '') == 'electrodomesticos_muebles' ? 'selected' : '' }}>
                                         Crédito a Electrodomésticos y Muebles
-                                        ({{ setting('calculadora.electrodomesticos') }}
-                                        %)</option>
+                                        </option>
                                 </select>
                                 <label for="precio_contado">Precio Contado:</label>
                                 <input class="form-control" type="number" name="precio_contado"

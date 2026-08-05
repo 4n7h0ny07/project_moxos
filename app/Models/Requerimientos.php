@@ -17,6 +17,21 @@ class Requerimientos extends Model
 
     protected $table = 'requerimientos';
 
+    protected $fillable = [
+        'personas_id',
+        'number_requerimient',
+        'type_requerimient',
+        'currency_requerimient',
+        'images_requerimient',
+        'advance_payment',
+        'total_payment',
+        'saldo_payment',
+        'document_requerimient',
+        'detail_requerimient',
+        'observation_requerimient',
+        'user_id',
+    ];
+
 
     public function personas()
     {
@@ -62,7 +77,7 @@ class Requerimientos extends Model
             $newNumber = $lastNumber + 1;
         }
 
-        $numberFormatted = str_pad($newNumber, 6, '0', STR_PAD_LEFT);            
+        $numberFormatted = str_pad($newNumber, 6, '0', STR_PAD_LEFT);
         $requerimientos->number_requerimient = $numberFormatted;
         });
     }

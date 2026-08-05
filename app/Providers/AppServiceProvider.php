@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Actions\altasPdf;
+use App\Actions\activosPdf;
 use App\Actions\certificatePdf;
 use App\Actions\VacationPdf;
 use App\Actions\requerimientosPdf;
@@ -29,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
         //
         Voyager::addAction(requerimientosPdf::class);
         Voyager::addAction(altasPdf::class);
+        Voyager::addAction(activosPdf::class);
         Voyager::addAction(VacationPdf::class);
         Voyager::addAction(finiquitoPdf::class);
         Voyager::addAction(certificatePdf::class);
